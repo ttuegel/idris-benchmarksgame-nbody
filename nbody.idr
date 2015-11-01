@@ -97,10 +97,6 @@ accelerate1 : Planet -> Vect n Planet -> (Planet, Vect n Planet)
 accelerate1 p Nil = (p, Nil)
 accelerate1 p ps = accelerate1_go p (reverse ps) Nil where
 
-  plusReducesS : (j : Nat) -> (k : Nat) -> plus j (S k) = S (plus j k)
-  plusReducesS Z k = Refl
-  plusReducesS (S i) k = cong (plusReducesS i k)
-
   accelerate1_go : Planet -> Vect i Planet -> Vect j Planet -> (Planet, Vect (j + i) Planet)
   accelerate1_go this Nil result ?= (this, result)
   accelerate1_go this (next :: rest) result ?=
