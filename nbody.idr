@@ -1,5 +1,8 @@
 import Data.Vect
 
+-- The Computer Language Benchmarks Game: n-body
+-- http://benchmarksgame.alioth.debian.org/nbody-description.html
+
 record Planet where
   constructor MkPlanet
   x, y, z : Double
