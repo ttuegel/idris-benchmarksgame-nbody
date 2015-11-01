@@ -143,7 +143,7 @@ run n planets = run (n - 1) (advance planets)
 main : IO ()
 main = do
   putStrLn (show (energy initial))
-  let final = run 1000 initial
+  let final = run 50000000 initial
   putStrLn (show (energy final))
 
 ---------- Proofs ----------
