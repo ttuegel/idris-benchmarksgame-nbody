@@ -7,12 +7,13 @@ record Planet where
   mass : Double
 
 initial : Vect 5 Planet
-initial = sol :: jupiter :: saturn :: uranus :: neptune :: Nil
+initial = sol :: jovian
   where
     solarMass : Double
     solarMass = 4 * pow pi 2
     daysPerYear : Double
     daysPerYear = 365.24
+    jupiter : Planet
     jupiter = MkPlanet
                 {- x =    -} (4.84143144246472090e+00)
                 {- y =    -} (-1.16032004402742839e+00)
@@ -21,6 +22,7 @@ initial = sol :: jupiter :: saturn :: uranus :: neptune :: Nil
                 {- vy =   -} (7.69901118419740425e-03 * daysPerYear)
                 {- vz =   -} (-6.90460016972063023e-05 * daysPerYear)
                 {- mass = -} (9.54791938424326609e-04 * solarMass)
+    saturn : Planet
     saturn = MkPlanet
                {- x =    -} (8.34336671824457987e+00)
                {- y =    -} (4.12479856412430479e+00)
@@ -29,6 +31,7 @@ initial = sol :: jupiter :: saturn :: uranus :: neptune :: Nil
                {- vy =   -} (4.99852801234917238e-03 * daysPerYear)
                {- vz =   -} (2.30417297573763929e-05 * daysPerYear)
                {- mass = -} (2.85885980666130812e-04 * solarMass)
+    uranus : Planet
     uranus = MkPlanet
                {- x =    -} (1.28943695621391310e+01)
                {- y =    -} (-1.51111514016986312e+01)
@@ -37,6 +40,7 @@ initial = sol :: jupiter :: saturn :: uranus :: neptune :: Nil
                {- vy =   -} (2.37847173959480950e-03 * daysPerYear)
                {- vz =   -} (-2.96589568540237556e-05 * daysPerYear)
                {- mass = -} (4.36624404335156298e-05 * solarMass)
+    neptune : Planet
     neptune = MkPlanet
                 {- x =    -} (1.53796971148509165e+01)
                 {- y =    -} (-2.59193146099879641e+01)
@@ -45,13 +49,22 @@ initial = sol :: jupiter :: saturn :: uranus :: neptune :: Nil
                 {- vy =   -} (1.62824170038242295e-03 * daysPerYear)
                 {- vz =   -} (-9.51592254519715870e-05 * daysPerYear)
                 {- mass = -} (5.15138902046611451e-05 * solarMass)
+    jovian : Vect 4 Planet
+    jovian = jupiter :: saturn :: uranus :: neptune :: Nil
+    px : Double
+    px = sum (map (\p => vx p * mass p) jovian)
+    py : Double
+    py = sum (map (\p => vy p * mass p) jovian)
+    pz : Double
+    pz = sum (map (\p => vz p * mass p) jovian)
+    sol : Planet
     sol = MkPlanet
             {- x =    -} (0.0)
             {- y =    -} (0.0)
             {- z =    -} (0.0)
-            {- vx =   -} (0.0)
-            {- vy =   -} (0.0)
-            {- vz =   -} (0.0)
+            {- vx =   -} (-px / solarMass)
+            {- vy =   -} (-py / solarMass)
+            {- vz =   -} (-pz / solarMass)
             {- mass = -} (solarMass)
 
 kinetic1 : Planet -> Double
