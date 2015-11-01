@@ -140,9 +140,15 @@ move = map move1
 advance : Vect n Planet -> Vect n Planet
 advance = move . accelerate
 
+run : Int -> Vect n Planet -> Vect n Planet
+run 0 planets = planets
+run n planets = run (n - 1) (advance planets)
+
 main : IO ()
 main = do
   putStrLn (show (energy initial))
+  let final = run 1000 initial
+  putStrLn (show (energy final))
 
 ---------- Proofs ----------
 
