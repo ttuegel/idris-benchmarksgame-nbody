@@ -98,8 +98,8 @@ accelerate1 p Nil = (p, Nil)
 accelerate1 p ps = accelerate1_go p (reverse ps) Nil where
 
   accelerate1_go : Planet -> Vect i Planet -> Vect j Planet -> (Planet, Vect (j + i) Planet)
-  accelerate1_go this Nil result ?= (this, result)
-  accelerate1_go this (next :: rest) result ?=
+  accelerate1_go this Nil result = (this, result)
+  accelerate1_go this (next :: rest) result =
     let dx = x this - x next
         dy = y this - y next
         dz = z this - z next
