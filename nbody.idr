@@ -115,9 +115,9 @@ accelerate1 p ps = accelerate1_go p (reverse ps) Nil where
                        , vz = vz this - dz * fThis
                        } this
         fNext = mass this * ff
-        next' = record { vx = vx next - dx * fNext
-                       , vy = vy next - dy * fNext
-                       , vz = vz next - dz * fNext
+        next' = record { vx = vx next + dx * fNext
+                       , vy = vy next + dy * fNext
+                       , vz = vz next + dz * fNext
                        } next
     in accelerate1_go this' rest (next' :: result)
 
